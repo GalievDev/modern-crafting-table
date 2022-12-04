@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "moderncraftingtable",
+  "version": "${version}",
+  "name": "ModernCraftingTable",
+  "description": "",
+  "authors": [
+    "GalievDev"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/ModernCraftingTable/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.galievdev.moderncraftingtable.client.ModernCraftingTableClient"
+    ],
+    "main": [
+      "net.galievdev.moderncraftingtable.ModernCraftingTable"
+    ]
+  },
+  "mixins": [
+    "ModernCraftingTable.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.11",
+    "fabric": "*",
+    "minecraft": "1.18.2"
+  }
+}
