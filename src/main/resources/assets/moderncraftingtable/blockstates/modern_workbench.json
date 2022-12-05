@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "moderncraftingtable:block/modern_workbench" },
+    "facing=east": { "model": "moderncraftingtable:block/modern_workbench", "y": 90 },
+    "facing=south": { "model": "moderncraftingtable:block/modern_workbench", "y": 180 },
+    "facing=west": { "model": "moderncraftingtable:block/modern_workbench", "y": 270 }
+  }
+}
