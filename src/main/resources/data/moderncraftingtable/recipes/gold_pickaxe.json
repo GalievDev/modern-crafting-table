@@ -1,0 +1,14 @@
+{
+  "type": "moderncraftingtable:modern_workbench",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_pickaxe"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "output": {
+    "item": "minecraft:golden_pickaxe"
+  }
+}
