@@ -11,7 +11,6 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.text.Text;
 
 public class MWScreenHandler extends ScreenHandler {
     private final Inventory inventory;
@@ -21,8 +20,7 @@ public class MWScreenHandler extends ScreenHandler {
         this(syncId, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
     }
 
-    public MWScreenHandler(int syncId, PlayerInventory playerInventory,
-                                       Inventory inventory, PropertyDelegate delegate) {
+    public MWScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
         super(MCTScreenHandler.MW_SCREEN_HANDLER, syncId);
         checkSize(inventory, 4);
         this.inventory = inventory;
