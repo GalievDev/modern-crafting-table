@@ -8,8 +8,24 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * A simple {@code SidedInventory} implementation with only default methods + an item list getter.
+ *
+ * <h2>Reading and writing to tags</h2>
+ * Use {@link Inventories#writeNbt(NbtCompound, DefaultedList)} and {@link Inventories#readNbt(NbtCompound, DefaultedList)}
+ * on {@linkplain #getItems() the item list}.
+ *
+ * License: <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>
+ * @author Juuz
+ */
 @FunctionalInterface
 public interface ImplementedInventory extends SidedInventory {
+    /**
+     * Gets the item list of this inventory.
+     * Must return the same instance every time it's called.
+     *
+     * @return the item list
+     */
     DefaultedList<ItemStack> getItems();
 
     // Creation
@@ -127,7 +143,7 @@ public interface ImplementedInventory extends SidedInventory {
     /**
      * Takes a stack of the size from the slot.
      *
-     * <p>(default implementation) If there are fewer items in the slot than what are requested,
+     * <p>(default implementation) If there are less items in the slot than what are requested,
      * takes all items in that slot.
      *
      * @param slot the slot
@@ -147,7 +163,7 @@ public interface ImplementedInventory extends SidedInventory {
     /**
      * Removes the current stack in the {@code slot} and returns it.
      *
-     * <p>The default implementation uses {@link Inventories #removeStack(List, int)}
+     * <p>The default implementation uses {@link Inventories#removeStack(List, int)}
      *
      * @param slot the slot
      * @return the removed stack
@@ -159,6 +175,8 @@ public interface ImplementedInventory extends SidedInventory {
 
     /**
      * Replaces the current stack in the {@code slot} with the provided stack.
+     *
+     * <p>If the stack is too big for this inventory ({@link Inventory#getMaxCountPerStack()}),
      * it gets resized to this inventory's maximum amount.
      *
      * @param slot the slot

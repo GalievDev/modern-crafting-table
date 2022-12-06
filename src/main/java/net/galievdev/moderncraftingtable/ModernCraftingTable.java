@@ -2,6 +2,7 @@ package net.galievdev.moderncraftingtable;
 
 import net.fabricmc.api.ModInitializer;
 import net.galievdev.moderncraftingtable.screen.MCTScreenHandler;
+import net.galievdev.moderncraftingtable.setup.BlockEntityReg;
 import net.galievdev.moderncraftingtable.setup.BlocksReg;
 import net.galievdev.moderncraftingtable.setup.RecipesReg;
 import org.apache.logging.log4j.LogManager;
@@ -15,5 +16,6 @@ public class ModernCraftingTable implements ModInitializer {
         BlocksReg.registerModBlocks();
         RecipesReg.registerRecipes();
         MCTScreenHandler.registerAllScreenHandlers();
+        BlockEntityReg.registerAllBlockEntities();
     }
 }

@@ -16,6 +16,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
@@ -70,7 +71,7 @@ public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScre
 
     @Override
     public Text getDisplayName() {
-        return new TranslatableText("modern_workbench");
+        return new LiteralText("Modern Workbench");
     }
 
     @Nullable
