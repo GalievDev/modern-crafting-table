@@ -28,7 +28,7 @@ import java.util.Optional;
 
 public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory =
-            DefaultedList.ofSize(4, ItemStack.EMPTY);
+            DefaultedList.ofSize(10, ItemStack.EMPTY);
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;

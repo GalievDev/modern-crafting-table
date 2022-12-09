@@ -17,12 +17,12 @@ public class MWScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public MWScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
+        this(syncId, playerInventory, new SimpleInventory(10), new ArrayPropertyDelegate(10));
     }
 
     public MWScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
         super(MCTScreenHandlers.MW_SCREEN_HANDLER, syncId);
-        checkSize(inventory, 4);
+        checkSize(inventory, 10);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
