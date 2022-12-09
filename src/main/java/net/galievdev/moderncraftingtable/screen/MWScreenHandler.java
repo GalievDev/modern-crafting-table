@@ -21,7 +21,7 @@ public class MWScreenHandler extends ScreenHandler {
     }
 
     public MWScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
-        super(MCTScreenHandler.MW_SCREEN_HANDLER, syncId);
+        super(MCTScreenHandlers.MW_SCREEN_HANDLER, syncId);
         checkSize(inventory, 4);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
@@ -29,9 +29,19 @@ public class MWScreenHandler extends ScreenHandler {
 
         //
         this.addSlot(new FuelSlot(inventory, 0, 18, 50));
-        this.addSlot(new Slot(inventory, 1, 66, 16));
-        this.addSlot(new Slot(inventory, 2, 66, 50));
-        this.addSlot(new ResultSlot(inventory, 3, 114, 33));
+        this.addSlot(new Slot(inventory, 1, 65, 15));
+        this.addSlot(new Slot(inventory, 2, 65, 30));
+        this.addSlot(new Slot(inventory, 3, 65, 45));
+
+        this.addSlot(new Slot(inventory, 4, 85, 15));
+        this.addSlot(new Slot(inventory, 5, 85, 30));
+        this.addSlot(new Slot(inventory, 6, 85, 45));
+
+        this.addSlot(new Slot(inventory, 7, 45, 15));
+        this.addSlot(new Slot(inventory, 8, 45, 30));
+        this.addSlot(new Slot(inventory, 9, 45, 45));
+
+        this.addSlot(new ResultSlot(inventory, 10, 114, 33));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);

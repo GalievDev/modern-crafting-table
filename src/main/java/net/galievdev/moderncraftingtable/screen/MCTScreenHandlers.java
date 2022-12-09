@@ -5,7 +5,7 @@ import net.galievdev.moderncraftingtable.ModernCraftingTable;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
-public class MCTScreenHandler {
+public class MCTScreenHandlers {
     public static ScreenHandlerType<MWScreenHandler> MW_SCREEN_HANDLER;
 
     public static void registerAllScreenHandlers() {
