@@ -1,5 +1,6 @@
 package net.galievdev.moderncraftingtable.screen;
 
+import net.galievdev.moderncraftingtable.block.ModernWorkbenchBlockEntity;
 import net.galievdev.moderncraftingtable.screen.slot.FuelSlot;
 import net.galievdev.moderncraftingtable.screen.slot.ResultSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,9 +8,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.*;
 import net.minecraft.screen.slot.Slot;
 
 public class MWScreenHandler extends ScreenHandler {
@@ -27,24 +26,23 @@ public class MWScreenHandler extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
 
-        //
-        this.addSlot(new FuelSlot(inventory, 0, 18, 50));
-        this.addSlot(new Slot(inventory, 1, 65, 15));
-        this.addSlot(new Slot(inventory, 2, 65, 30));
-        this.addSlot(new Slot(inventory, 3, 65, 45));
+        int m;
+        int l;
+        for (m = 0; m < 3; ++m) {
+            for (l = 0; l < 3; ++l) {
+                this.addSlot(new Slot(inventory, l + m * 3, 30 + l * 18, 17 + m * 18));
+            }
+        }
+        for (m = 0; m < 3; ++m) {
+            for (l = 0; l < 9; ++l) {
+                this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 84 + m * 18));
+            }
+        }
+        for (m = 0; m < 9; ++m) {
+            this.addSlot(new Slot(playerInventory, m, 8 + m * 18, 142));
+        }
 
-        this.addSlot(new Slot(inventory, 4, 85, 15));
-        this.addSlot(new Slot(inventory, 5, 85, 30));
-        this.addSlot(new Slot(inventory, 6, 85, 45));
-
-        this.addSlot(new Slot(inventory, 7, 45, 15));
-        this.addSlot(new Slot(inventory, 8, 45, 30));
-        this.addSlot(new Slot(inventory, 9, 45, 45));
-
-        this.addSlot(new ResultSlot(inventory, 10, 114, 33));
-
-        addPlayerInventory(playerInventory);
-        addPlayerHotbar(playerInventory);
+        this.addSlot(new ResultSlot(inventory, 10, 124, 35));
 
         addProperties(delegate);
     }
@@ -63,14 +61,6 @@ public class MWScreenHandler extends ScreenHandler {
         int progressArrowSize = 26; // This is the width in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    public int getScaledFuelProgress() {
-        int fuelProgress = this.propertyDelegate.get(2);
-        int maxFuelProgress = this.propertyDelegate.get(3);
-        int fuelProgressSize = 14;
-
-        return maxFuelProgress != 0 ? (int)(((float)fuelProgress / (float)maxFuelProgress) * fuelProgressSize) : 0;
     }
 
     @Override
@@ -101,19 +91,5 @@ public class MWScreenHandler extends ScreenHandler {
         }
 
         return newStack;
-    }
-
-    private void addPlayerInventory(PlayerInventory playerInventory) {
-        for (int i = 0; i < 3; ++i) {
-            for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
-            }
-        }
-    }
-
-    private void addPlayerHotbar(PlayerInventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
-        }
     }
 }

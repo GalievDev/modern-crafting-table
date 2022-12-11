@@ -65,7 +65,7 @@ public class ModernWorkbench extends BlockWithEntity implements BlockEntityProvi
         return SHAPE;
     }
 
-/*    BLOCK ENTITY*/
+    /*    BLOCK ENTITY*/
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;

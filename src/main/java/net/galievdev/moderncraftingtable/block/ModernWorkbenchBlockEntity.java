@@ -7,6 +7,7 @@ import net.galievdev.moderncraftingtable.screen.MWScreenHandler;
 import net.galievdev.moderncraftingtable.setup.BlockEntityReg;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -33,8 +34,8 @@ public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScre
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
-    private int fuelTime = 0;
-    private int maxFuelTime = 0;
+    private int time = 0;
+    private int maxTime = 0;
 
     public ModernWorkbenchBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityReg.MODERN_WORKBENCH, pos, state);
@@ -43,8 +44,7 @@ public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScre
                 return switch (index) {
                     case 0 -> ModernWorkbenchBlockEntity.this.progress;
                     case 1 -> ModernWorkbenchBlockEntity.this.maxProgress;
-                    case 2 -> ModernWorkbenchBlockEntity.this.fuelTime;
-                    case 3 -> ModernWorkbenchBlockEntity.this.maxFuelTime;
+                    case 2 -> ModernWorkbenchBlockEntity.this.time;
                     default -> 0;
                 };
             }
@@ -53,13 +53,12 @@ public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScre
                 switch (index) {
                     case 0 -> ModernWorkbenchBlockEntity.this.progress = value;
                     case 1 -> ModernWorkbenchBlockEntity.this.maxProgress = value;
-                    case 2 -> ModernWorkbenchBlockEntity.this.fuelTime = value;
-                    case 3 -> ModernWorkbenchBlockEntity.this.maxFuelTime = value;
+                    case 2 -> ModernWorkbenchBlockEntity.this.time = value;
                 }
             }
 
             public int size() {
-                return 4;
+                return 10;
             }
         };
     }
@@ -77,43 +76,34 @@ public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScre
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new MWScreenHandler(syncId, inv, this, this.propertyDelegate);
+        return new MWScreenHandler(syncId, inv);
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("blaster.progress", progress);
-        nbt.putInt("blaster.fuelTime", fuelTime);
-        nbt.putInt("blaster.maxFuelTime", maxFuelTime);
+        nbt.putInt("workbench.progress", progress);
+        nbt.putInt("workbench.time", time);
+        nbt.putInt("workbench.maxTime", maxTime);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
         super.readNbt(nbt);
-        progress = nbt.getInt("blaster.progress");
-        fuelTime = nbt.getInt("blaster.fuelTime");
-        maxFuelTime = nbt.getInt("blaster.maxFuelTime");
+        progress = nbt.getInt("workbench.progress");
+        time = nbt.getInt("workbench.time");
+        maxTime = nbt.getInt("workbench.maxTime");
     }
 
-    private void consumeFuel() {
-        if(!getStack(0).isEmpty()) {
-            this.fuelTime = FuelRegistry.INSTANCE.get(this.removeStack(0, 1).getItem());
-            this.maxFuelTime = this.fuelTime;
-        }
-    }
 
     public static void tick(World world, BlockPos pos, BlockState state, ModernWorkbenchBlockEntity entity) {
         if(isConsumingFuel(entity)) {
-            entity.fuelTime--;
+            entity.time--;
         }
 
         if(hasRecipe(entity)) {
-            if(hasFuelInFuelSlot(entity) && !isConsumingFuel(entity)) {
-                entity.consumeFuel();
-            }
             if(isConsumingFuel(entity)) {
                 entity.progress++;
                 if(entity.progress > entity.maxProgress) {
@@ -125,12 +115,8 @@ public class ModernWorkbenchBlockEntity extends BlockEntity implements NamedScre
         }
     }
 
-    private static boolean hasFuelInFuelSlot(ModernWorkbenchBlockEntity entity) {
-        return !entity.getStack(0).isEmpty();
-    }
-
     private static boolean isConsumingFuel(ModernWorkbenchBlockEntity entity) {
-        return entity.fuelTime > 0;
+        return entity.time > 0;
     }
 
     private static boolean hasRecipe(ModernWorkbenchBlockEntity entity) {

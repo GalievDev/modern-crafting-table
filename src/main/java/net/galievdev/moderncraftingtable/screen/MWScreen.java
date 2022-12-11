@@ -10,17 +10,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class MWScreen extends HandledScreen<MWScreenHandler> {
-    private static final Identifier TEXTURE =
-            new Identifier(ModernCraftingTable.MOD_ID, "textures/gui/crafting_bench.png");
+    private static final Identifier TEXTURE = new Identifier(ModernCraftingTable.MOD_ID, "textures/gui/crafting_table.png");
 
     public MWScreen(MWScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
     }
 
     @Override
@@ -32,14 +25,9 @@ public class MWScreen extends HandledScreen<MWScreenHandler> {
         int y = (height - backgroundHeight) / 2;
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        if(handler.isCrafting()) {
+/*        if(handler.isCrafting()) {
             drawTexture(matrices, x + 84, y + 22, 176, 14, handler.getScaledProgress(), 36);
-        }
-
-        if(handler.hasFuel()) {
-            drawTexture(matrices, x + 18, y + 33 + 14 - handler.getScaledFuelProgress(), 176,
-                    14 - handler.getScaledFuelProgress(), 14, handler.getScaledFuelProgress());
-        }
+        }*/
     }
 
     @Override
@@ -47,5 +35,11 @@ public class MWScreen extends HandledScreen<MWScreenHandler> {
         renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
     }
 }

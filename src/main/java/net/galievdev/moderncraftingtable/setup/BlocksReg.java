@@ -26,7 +26,6 @@ public class BlocksReg {
     public static final Block MODERN_WORKBENCH = registerBlock("modern_workbench",
             new ModernWorkbench(FabricBlockSettings.of(Material.METAL).nonOpaque()), ItemGroup.MATERIALS);
 
-
     private static Block registerBlock(String name, Block block, ItemGroup group, String tooltipKey) {
         registerBlockItem(name, block, group, tooltipKey);
         return Registry.register(Registry.BLOCK, new Identifier(ModernCraftingTable.MOD_ID, name), block);

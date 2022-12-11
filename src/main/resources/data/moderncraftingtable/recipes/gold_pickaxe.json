@@ -1,8 +1,31 @@
 {
   "type": "moderncraftingtable:modern_workbench",
+  "tier": 1,
+  "time": 1000,
   "ingredients": [
     {
       "item": "minecraft:stone_pickaxe"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
     },
     {
       "item": "minecraft:gold_ingot"
